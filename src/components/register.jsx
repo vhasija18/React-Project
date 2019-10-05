@@ -1,15 +1,16 @@
 import React, { Component } from "react";
-import TextField from "material-ui/TextField";
+import TextField from "@material-ui/core/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import RaisedButton from "material-ui/RaisedButton";
-import AppBar from "material-ui/AppBar";
+import AppBar from "@material-ui/core/AppBar";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import InputBase from "@material-ui/core/InputBase";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import { withStyles } from "@material-ui/core/styles";
-
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router";
 const BootstrapInput = withStyles(theme => ({
   root: {
     "label + &": {
@@ -157,16 +158,24 @@ class Regiter extends Component {
     return (
       <div>
         <MuiThemeProvider>
-          <div>
-            <AppBar title="login" />
+          <AppBar position="static" style={appbar}>
+            <Button href="/" style={appbutton} color="inherit">
+              Login
+            </Button>
+          </AppBar>
+          <div style={top_margin}>
             <TextField
-              hintText="Enter your First Name"
+              placeholder="First Name"
+              variant="outlined"
               onChange={(event, newValue) =>
                 this.setState({ firstName: newValue })
               }
             />
             <TextField
-              hintText="Enter your Last Name"
+              placeholder="Last Name"
+              variant="outlined"
+              style={datemargin}
+              marginLeft="auto"
               onChange={(event, newValue) =>
                 this.setState({ lastName: newValue })
               }
@@ -174,13 +183,17 @@ class Regiter extends Component {
             <br />
             <TextField
               type="email"
-              hintText="Enter your email address"
+              placeholder="Email address"
+              variant="outlined"
+              margin="normal"
               onChange={(event, newValue) => this.setState({ email: newValue })}
             />
             <br></br>
             <TextField
               type="password"
-              hintText="Enter your Password"
+              placeholder="Password"
+              margin="normal"
+              variant="outlined"
               onChange={(event, newValue) =>
                 this.setState({ password: newValue })
               }
@@ -193,7 +206,8 @@ class Regiter extends Component {
               row
             >
               <div style={radiogroup}>
-                <a>Gender: </a>
+                <a style={gender_heading}>Gender: </a>
+                <br></br>
                 <FormControlLabel
                   value="female"
                   control={<Radio />}
@@ -212,9 +226,10 @@ class Regiter extends Component {
                 />
               </div>
             </RadioGroup>
-            <br />
-            Date of Birth:
+            <a style={dob_heading}>Date of Birth:</a>
+            <br></br>
             <NativeSelect
+              style={monthmargin}
               onChange={this.handleMonth}
               input={<BootstrapInput />}
             >
@@ -231,7 +246,11 @@ class Regiter extends Component {
                 </option>
               ))}
             </NativeSelect>
-            <NativeSelect onChange={this.handleYear} input={<BootstrapInput />}>
+            <NativeSelect
+              style={datemargin}
+              onChange={this.handleYear}
+              input={<BootstrapInput />}
+            >
               {years.map(year => (
                 <option key={year} value={year}>
                   {year}
@@ -253,12 +272,39 @@ class Regiter extends Component {
     );
   }
 }
-
+const appbar = {
+  background: "#00BCD4",
+  padding: "10px",
+  textAlign: "right",
+  height: "50px"
+};
+const appbutton = {
+  width: "50px",
+  marginLeft: "1150px"
+};
 const radiogroup = {
   marginLeft: "auto",
   marginRight: "auto"
 };
 const radioitem = {
   marginleft: "auto"
+};
+const top_margin = {
+  margin: 60
+};
+const dob_heading = {
+  marginLeft: "-210px",
+  color: "#808080"
+};
+const gender_heading = {
+  marginLeft: "-250px",
+  color: "#808080"
+};
+const monthmargin = {
+  marginLeft: "-40px",
+  marginRight: "15px"
+};
+const datemargin = {
+  marginLeft: "15px"
 };
 export default Regiter;

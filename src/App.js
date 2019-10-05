@@ -9,20 +9,16 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <AppBar position="static" style={appbar}>
-          Login
-        </AppBar>
         <Route exact path="/" component={Login} />
+        <Route path="/lgoin" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/profile" component={Register} />
       </div>
     </Router>
   );
 }
-const appbar = {
-  background: "#2E3B55",
-  padding: "10px",
-  textAlign: "right"
+const bottomLine = {
+  background: "#2E3B55"
 };
 
 export default App;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AppBar from "@material-ui/core/AppBar";
 import RaisedButton from "material-ui/RaisedButton";
-import TextField from "material-ui/TextField";
+import TextField from "@material-ui/core/TextField";
 
 class Login extends Component {
   constructor(props) {
@@ -30,10 +30,12 @@ class Login extends Component {
     return (
       <div>
         <MuiThemeProvider>
-          <div>
+          <AppBar position="static" style={appbar}></AppBar>
+          <div style={top_margin}>
             <TextField
-              hintText="Enter your Username"
-              floatingLabelText="Username"
+              placeholder="Email Id"
+              margin="normal"
+              variant="outlined"
               onChange={(event, newValue) =>
                 this.setState({ username: newValue })
               }
@@ -41,8 +43,9 @@ class Login extends Component {
             <br />
             <TextField
               type="password"
-              hintText="Enter your Password"
-              floatingLabelText="Password"
+              placeholder="Password"
+              variant="outlined"
+              margin="normal"
               onChange={(event, newValue) =>
                 this.setState({ password: newValue })
               }
@@ -77,8 +80,12 @@ const style = {
   margin: 15
 };
 const appbar = {
-  background: "#2E3B55",
+  background: "#00BCD4",
   padding: "10px",
-  textAlign: "right"
+  textAlign: "right",
+  height: "50px"
 };
 export default Login;
+const top_margin = {
+  margin: 60
+};
