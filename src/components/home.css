@@ -1,0 +1,51 @@
+.left {
+  height: 100%;
+  width: 20%;
+  position: fixed;
+  left: 0;
+  border-width: 0px 0.2px 0px 0px;
+  border-color: #808080;
+  margin-top: 25px;
+}
+
+.right {
+  height: 100%;
+  width: 20%;
+  right: 0;
+  position: fixed;
+  border-width: 0px 0.2px 0px 0px;
+  border-color: #808080;
+  margin-top: 25px;
+}
+
+.center {
+  right: 20%;
+  left: 20%;
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  border-width: 0px 0.2px 0px 0px;
+  border-color: #808080;
+  overflow-y: auto;
+  margin-top: 25px;
+}
+
+.status_box {
+  width: 100%;
+  height: 70px;
+  margin-bottom: 10px;
+}
+.big_avatar {
+  margin: 40;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.row_layout {
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+.Name_style {
+  font-size: 40px;
+}

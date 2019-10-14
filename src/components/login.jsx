@@ -5,28 +5,34 @@ import RaisedButton from "material-ui/RaisedButton";
 import TextField from "@material-ui/core/TextField";
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    //this.handleClick = this.handleClick.bind(this);
-    this.state = {
-      username: "",
-      password: "",
-      st: false
-    };
-  }
+  state = {
+    user_id: "",
+    password: "",
+    st: false
+  };
+
   validateForm() {
     return this.state.email.Length > 0 && this.state.password.Length > 0;
   }
 
-  handlelogin() {
-    console.log(this.context);
-    console.log(this.state.username);
+  handleChange_name = event => {
+    const user_id = event.target.value;
+    this.setState({ user_id });
+  };
+  handleChange_password = event => {
+    const password = event.target.value;
+    this.setState({ password });
+  };
+  handlelogin = () => {
+    console.log(this.state.user_id);
     console.log(this.state.password);
-  }
+    this.props.history.push("/home");
+  };
   handleregister() {
     this.props.history.push("/register");
   }
   render() {
+    const { user_id, password } = this.state;
     return (
       <div>
         <MuiThemeProvider>
@@ -36,9 +42,8 @@ class Login extends Component {
               placeholder="Email Id"
               margin="normal"
               variant="outlined"
-              onChange={(event, newValue) =>
-                this.setState({ username: newValue })
-              }
+              value={user_id}
+              onChange={this.handleChange_name}
             />
             <br />
             <TextField
@@ -46,9 +51,8 @@ class Login extends Component {
               placeholder="Password"
               variant="outlined"
               margin="normal"
-              onChange={(event, newValue) =>
-                this.setState({ password: newValue })
-              }
+              value={password}
+              onChange={this.handleChange_password}
             />
             <br />
             <RaisedButton

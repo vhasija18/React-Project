@@ -10,7 +10,7 @@ import InputBase from "@material-ui/core/InputBase";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router";
+
 const BootstrapInput = withStyles(theme => ({
   root: {
     "label + &": {
@@ -111,23 +111,22 @@ const Dates = [
   "30",
   "31"
 ];
-
 class Regiter extends Component {
-  //const [value, setValue] = React.useState("None");
-  constructor(props) {
-    super(props);
-    this.state = {
-      firstName: "",
-      lastName: "",
-      password: "",
-      email: "",
-      dob: "",
-      gender: "",
-      month: "",
-      year: "",
-      date: ""
-    };
+  constructor() {
+    const alert = useAlert();
   }
+  state = {
+    firstName: "",
+    lastName: "",
+    password: "",
+    email: "",
+    dob: "",
+    gender: "",
+    month: "",
+    year: "",
+    date: ""
+  };
+
   handleMonth = event => {
     this.state.month = event.target.value;
     console.log(event.target.value);
@@ -144,6 +143,22 @@ class Regiter extends Component {
     this.state.date = event.target.value;
     console.log(event.target.value);
   };
+  handleEmail = event => {
+    const email = event.target.value;
+    this.setState({ email });
+  };
+  handleFirstName = event => {
+    const firstName = event.target.value;
+    this.setState({ firstName });
+  };
+  handleLastName = event => {
+    const lastName = event.target.value;
+    this.setState({ lastName });
+  };
+  handlePassowrd = event => {
+    const password = event.target.value;
+    this.setState({ password });
+  };
   handleSubmit() {
     console.log(this.state.firstName);
     console.log(this.state.lastName);
@@ -153,8 +168,11 @@ class Regiter extends Component {
     this.state.dob =
       this.state.month + " " + this.state.date + " " + this.state.year;
     console.log(this.state.dob);
+    alert.show("ohlook");
   }
   render() {
+    const { firstName, lastName, email, passowrd } = this.state;
+
     return (
       <div>
         <MuiThemeProvider>
@@ -167,18 +185,16 @@ class Regiter extends Component {
             <TextField
               placeholder="First Name"
               variant="outlined"
-              onChange={(event, newValue) =>
-                this.setState({ firstName: newValue })
-              }
+              value={firstName}
+              onChange={this.handleFirstName}
             />
             <TextField
               placeholder="Last Name"
               variant="outlined"
               style={datemargin}
               marginLeft="auto"
-              onChange={(event, newValue) =>
-                this.setState({ lastName: newValue })
-              }
+              value={lastName}
+              onChange={this.handleLastName}
             />
             <br />
             <TextField
@@ -186,7 +202,8 @@ class Regiter extends Component {
               placeholder="Email address"
               variant="outlined"
               margin="normal"
-              onChange={(event, newValue) => this.setState({ email: newValue })}
+              value={email}
+              onChange={this.handleEmail}
             />
             <br></br>
             <TextField
@@ -194,9 +211,8 @@ class Regiter extends Component {
               placeholder="Password"
               margin="normal"
               variant="outlined"
-              onChange={(event, newValue) =>
-                this.setState({ password: newValue })
-              }
+              value={passowrd}
+              onChange={this.handlePassowrd}
             />
             <br />
             <RadioGroup
