@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import RaisedButton from "material-ui/RaisedButton";
@@ -10,6 +10,9 @@ import InputBase from "@material-ui/core/InputBase";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Notify, { AlertTypes } from "../services/notify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BootstrapInput = withStyles(theme => ({
   root: {
@@ -111,21 +114,22 @@ const Dates = [
   "30",
   "31"
 ];
+
 class Regiter extends Component {
   constructor() {
-    const alert = useAlert();
+    super();
+    this.state = {
+      firstName: "",
+      lastName: "",
+      password: "",
+      email: "",
+      dob: "",
+      gender: "",
+      month: "",
+      year: "",
+      date: ""
+    };
   }
-  state = {
-    firstName: "",
-    lastName: "",
-    password: "",
-    email: "",
-    dob: "",
-    gender: "",
-    month: "",
-    year: "",
-    date: ""
-  };
 
   handleMonth = event => {
     this.state.month = event.target.value;
@@ -133,7 +137,7 @@ class Regiter extends Component {
   };
   handleGender = event => {
     this.state.gender = event.target.value;
-    console.log(event.target.value);
+    console.log(this.state.gender);
   };
   handleYear = event => {
     this.state.year = event.target.value;
@@ -168,11 +172,17 @@ class Regiter extends Component {
     this.state.dob =
       this.state.month + " " + this.state.date + " " + this.state.year;
     console.log(this.state.dob);
-    alert.show("ohlook");
+    Notify.sendNotification("Success from Home!", AlertTypes.success);
+    this.setState({ firstName: "", lastName: "", email: "" });
+  }
+
+  componentDidMount() {
+    Notify.notifications.subscribe(
+      alert => alert instanceof Function && alert()
+    );
   }
   render() {
-    const { firstName, lastName, email, passowrd } = this.state;
-
+    const { firstName, lastName, email, passowrd, value } = this.state;
     return (
       <div>
         <MuiThemeProvider>
@@ -219,7 +229,6 @@ class Regiter extends Component {
               aria-label="gender"
               name="gender1"
               onChange={this.handleGender}
-              row
             >
               <div style={radiogroup}>
                 <a style={gender_heading}>Gender: </a>
@@ -283,6 +292,7 @@ class Regiter extends Component {
               }}
             />
           </div>
+          <ToastContainer autoClose={3500} />
         </MuiThemeProvider>
       </div>
     );

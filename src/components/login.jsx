@@ -3,6 +3,9 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AppBar from "@material-ui/core/AppBar";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "@material-ui/core/TextField";
+import Notify, { AlertTypes } from "../services/notify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class Login extends Component {
   state = {
@@ -12,7 +15,27 @@ class Login extends Component {
   };
 
   validateForm() {
-    return this.state.email.Length > 0 && this.state.password.Length > 0;
+    //var reg = /^([\w]+)@([\w]+\.)+([\w]+)$/i;
+    var reg = /^[\w]+\@([\w]+\.)+[\w]+$/i;
+    var message = "";
+    var flag = 0;
+    if (!reg.test(this.state.user_id)) {
+      flag = 1;
+      message = "Check your ID";
+    }
+    if (this.state.user_id.length < 8) {
+      if (flag == 1) {
+        message = message + " and Check your passowrd";
+      } else {
+        flag = 1;
+        message = "Check your Passowrd";
+      }
+    }
+    if (flag == 1) {
+      Notify.sendNotification(message, AlertTypes.error);
+    } else {
+      Notify.sendNotification("Login Succesfull", AlertTypes.success);
+    }
   }
 
   handleChange_name = event => {
@@ -24,15 +47,19 @@ class Login extends Component {
     this.setState({ password });
   };
   handlelogin = () => {
+    this.validateForm();
     console.log(this.state.user_id);
     console.log(this.state.password);
-    this.props.history.push("/home");
+    //this.props.history.push("/home");
   };
   handleregister() {
     this.props.history.push("/register");
   }
   render() {
     const { user_id, password } = this.state;
+    Notify.notifications.subscribe(
+      alert => alert instanceof Function && alert()
+    );
     return (
       <div>
         <MuiThemeProvider>
@@ -44,6 +71,7 @@ class Login extends Component {
               variant="outlined"
               value={user_id}
               onChange={this.handleChange_name}
+              type="email"
             />
             <br />
             <TextField
@@ -76,6 +104,7 @@ class Login extends Component {
             />
           </div>
         </MuiThemeProvider>
+        <ToastContainer autoClose={3500} />
       </div>
     );
   }
