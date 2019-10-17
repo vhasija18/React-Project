@@ -28,9 +28,6 @@ class NotificationService {
           case AlertTypes.error:
             notifications.next(() => toast.error(msg, this.configuration));
             break;
-          default:
-            notifications.next(() => toast(msg, this.configuration));
-            break;
         }
       }
     } catch (ex) {

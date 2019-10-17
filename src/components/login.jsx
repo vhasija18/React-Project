@@ -19,11 +19,15 @@ class Login extends Component {
     var reg = /^[\w]+\@([\w]+\.)+[\w]+$/i;
     var message = "";
     var flag = 0;
+    console.log(flag);
+    console.log("Hello");
     if (!reg.test(this.state.user_id)) {
+      console.log("f");
       flag = 1;
       message = "Check your ID";
     }
     if (this.state.user_id.length < 8) {
+      console.log("k");
       if (flag == 1) {
         message = message + " and Check your passowrd";
       } else {
@@ -34,6 +38,7 @@ class Login extends Component {
     if (flag == 1) {
       Notify.sendNotification(message, AlertTypes.error);
     } else {
+      console.log("hhh");
       Notify.sendNotification("Login Succesfull", AlertTypes.success);
     }
   }
@@ -55,11 +60,14 @@ class Login extends Component {
   handleregister() {
     this.props.history.push("/register");
   }
-  render() {
-    const { user_id, password } = this.state;
+  componentDidMount() {
     Notify.notifications.subscribe(
       alert => alert instanceof Function && alert()
     );
+  }
+  render() {
+    const { user_id, password } = this.state;
+
     return (
       <div>
         <MuiThemeProvider>
@@ -103,8 +111,8 @@ class Login extends Component {
               }}
             />
           </div>
+          <ToastContainer autoClose={3500} />
         </MuiThemeProvider>
-        <ToastContainer autoClose={3500} />
       </div>
     );
   }
