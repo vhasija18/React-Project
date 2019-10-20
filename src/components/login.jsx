@@ -15,19 +15,16 @@ class Login extends Component {
   };
 
   validateForm() {
-    //var reg = /^([\w]+)@([\w]+\.)+([\w]+)$/i;
     var reg = /^[\w]+\@([\w]+\.)+[\w]+$/i;
     var message = "";
     var flag = 0;
     console.log(flag);
     console.log("Hello");
     if (!reg.test(this.state.user_id)) {
-      console.log("f");
       flag = 1;
       message = "Check your ID";
     }
     if (this.state.user_id.length < 8) {
-      console.log("k");
       if (flag == 1) {
         message = message + " and Check your passowrd";
       } else {
@@ -38,7 +35,9 @@ class Login extends Component {
     if (flag == 1) {
       Notify.sendNotification(message, AlertTypes.error);
     } else {
-      console.log("hhh");
+      console.log(this.state.user_id);
+      console.log(this.state.password);
+      this.props.history.push("/home");
       Notify.sendNotification("Login Succesfull", AlertTypes.success);
     }
   }
@@ -53,18 +52,11 @@ class Login extends Component {
   };
   handlelogin = () => {
     this.validateForm();
-    console.log(this.state.user_id);
-    console.log(this.state.password);
-    //this.props.history.push("/home");
   };
   handleregister() {
     this.props.history.push("/register");
   }
-  componentDidMount() {
-    Notify.notifications.subscribe(
-      alert => alert instanceof Function && alert()
-    );
-  }
+
   render() {
     const { user_id, password } = this.state;
 
@@ -111,22 +103,23 @@ class Login extends Component {
               }}
             />
           </div>
-          <ToastContainer autoClose={3500} />
         </MuiThemeProvider>
       </div>
     );
   }
 }
+export default Login;
 const style = {
-  margin: 15
+  margin: 15,
+  backgroundColor: "#3F51B5"
 };
 const appbar = {
-  background: "#00BCD4",
+  background: "#3F51B5",
   padding: "10px",
   textAlign: "right",
   height: "50px"
 };
-export default Login;
+
 const top_margin = {
   margin: 60
 };

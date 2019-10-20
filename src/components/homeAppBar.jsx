@@ -159,6 +159,9 @@ export default function Hook() {
               <MoreIcon />
             </IconButton>
           </div>
+          <Button color="inherit" style={{ marginLeft: "10px" }}>
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

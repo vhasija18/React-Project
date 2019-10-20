@@ -164,23 +164,66 @@ class Regiter extends Component {
     this.setState({ password });
   };
   handleSubmit() {
-    console.log(this.state.firstName);
-    console.log(this.state.lastName);
-    console.log(this.state.email);
-    console.log(this.state.password);
-    console.log(this.state.gender);
-    this.state.dob =
-      this.state.month + " " + this.state.date + " " + this.state.year;
-    console.log(this.state.dob);
-    Notify.sendNotification("Success from Home!", AlertTypes.success);
-    this.setState({ firstName: "", lastName: "", email: "" });
+    this.validate();
+  }
+  validate() {
+    var flag = 0;
+    var message = "";
+    var reg = /^[\w]+\@([\w]+\.)+[\w]+$/i;
+    var reg_password = /^(?=.*[\w])(?=.*[#$^+=!*()@%&]).{8,10}$/;
+    if (this.state.firstName.length == 0) {
+      flag = 1;
+      message = "Enter your first Name";
+    }
+    if (this.state.lastName.length == 0) {
+      if (flag == 1) {
+        message = message + " and Enter your Last Name";
+      } else {
+        flag = 1;
+        message = "Enter your last Name";
+      }
+    }
+    if (this.state.email.length == 0) {
+      if (flag == 1) {
+        message = message + "and Enter your email";
+      } else {
+        flag = 1;
+        message = "Enter your email";
+      }
+    }
+    if (this.state.password.length == 0) {
+      if (flag == 1) {
+        message = message + "and Enter your password";
+      } else {
+        flag = 1;
+        message = "Enter your password";
+      }
+    }
+    if (!reg.test(this.state.email)) {
+      flag = -1;
+      Notify.sendNotification("Invalid Email Id", AlertTypes.error);
+    }
+    if (!reg_password.test(this.state.password)) {
+      flag = -1;
+      Notify.sendNotification("Invalid Passowrd", AlertTypes.error);
+    }
+    if (flag == 1) {
+      Notify.sendNotification(message, AlertTypes.error);
+    }
+    if (flag != 1 || flag != -1) {
+      Notify.sendNotification("Registered! Go to Login", AlertTypes.success);
+      console.log(this.state.firstName);
+      console.log(this.state.lastName);
+      console.log(this.state.email);
+      console.log(this.state.password);
+      console.log(this.state.gender);
+      this.state.dob =
+        this.state.month + " " + this.state.date + " " + this.state.year;
+      console.log(this.state.dob);
+      this.setState({ firstName: "", lastName: "", email: "", password: "" });
+    }
   }
 
-  componentDidMount() {
-    Notify.notifications.subscribe(
-      alert => alert instanceof Function && alert()
-    );
-  }
   render() {
     const { firstName, lastName, email, passowrd, value } = this.state;
     return (
@@ -292,7 +335,6 @@ class Regiter extends Component {
               }}
             />
           </div>
-          <ToastContainer autoClose={3500} />
         </MuiThemeProvider>
       </div>
     );
