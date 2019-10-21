@@ -37,7 +37,7 @@ class Login extends Component {
     } else {
       console.log(this.state.user_id);
       console.log(this.state.password);
-      this.props.history.push("/home");
+      this.props.history.push({ pathname: "/home", data: this.state.user_id });
       Notify.sendNotification("Login Succesfull", AlertTypes.success);
     }
   }
@@ -95,6 +95,7 @@ class Login extends Component {
             <a>Not a member? Register!</a>
             <br />
             <RaisedButton
+              Color="primary"
               label="Register"
               primary={true}
               style={style}
@@ -110,8 +111,7 @@ class Login extends Component {
 }
 export default Login;
 const style = {
-  margin: 15,
-  backgroundColor: "#3F51B5"
+  margin: 15
 };
 const appbar = {
   background: "#3F51B5",

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./home.css";
 import "./homeAppBar.jsx";
-import App from "./homeAppBar.jsx";
+import App from "./test_homeAppbar.jsx";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -21,18 +21,32 @@ const rows = [
 function createData(name, calories, fat, carbs, protiens) {
   return { name, calories, fat, carbs, protiens };
 }
-const Name = "Vishwas";
+var Name = "Vishwas";
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.Namme = "helllooos";
+    this.state = {
+      Name: "Vishwas"
+    };
+  }
+  post = () => {
+    console.log("eeee");
+    this.props.history.push("/profile");
+  };
   render() {
+    const { data } = this.props.location;
+    this.state.Name = data;
+    console.log(this.state.Name);
     return (
       <div>
-        <App />
+        <App Onprofile={this.post} />
         <div className="left">
           <div>
             <img alt="DP" src={dp} className="big_avatar"></img>
           </div>
-          <a className="Name_style">{Name}</a>
+          <a className="Name_style">{this.state.Name}</a>
         </div>
         <div className="center">
           <div>
@@ -41,8 +55,8 @@ class Home extends Component {
               variant="outlined"
               className="status_box"
             ></TextField>
-            <Button variant="contained" color="primary" style={button}>
-              Post
+            <Button variant="contained" style={button} onClick={this.post}>
+              <a style={text_color}>Post</a>
             </Button>
           </div>
           <Table>
@@ -59,7 +73,7 @@ class Home extends Component {
             </TableBody>
           </Table>
         </div>
-        <div className="right">sdad</div>
+        <div className="right"></div>
       </div>
     );
   }
@@ -68,5 +82,10 @@ class Home extends Component {
 export default Home;
 
 const button = {
-  marginLeft: "700px"
+  marginLeft: "700px",
+  backgroundColor: "#00BCD4"
+};
+
+const text_color = {
+  color: "#FFFFFF"
 };

@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Notify from "./services/notify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Profile from "./components/profile";
 
 class App extends Component {
   componentDidMount() {
@@ -21,6 +22,7 @@ class App extends Component {
           <Route exact path="/" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/home" component={Home} />
+          <Route path="/profile" component={Profile} />
           <ToastContainer autoClose={3500} />
         </div>
       </Router>

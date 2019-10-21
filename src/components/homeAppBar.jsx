@@ -59,6 +59,7 @@ export default function Hook() {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+    window.open("/components/profile.jsx");
   };
 
   const handleMobileMenuOpen = event => {
