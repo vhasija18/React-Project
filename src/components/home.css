@@ -19,8 +19,7 @@
   left: 20%;
   height: 100%;
   width: 60%;
-  position: fixed;
-  overflow-y: auto;
+  position: relative;
   margin-top: 25px;
 }
 
@@ -68,6 +67,8 @@
   flex-direction: row;
 }
 
-.name_textfield {
-  border-bottom: none;
+.paper_size {
+  width: 170px;
+  height: 250px;
+  margin-bottom: 15px;
 }

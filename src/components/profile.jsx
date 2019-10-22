@@ -6,12 +6,13 @@ import IconButton from "@material-ui/core/IconButton";
 import Edit from "@material-ui/icons/Edit";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-
+import Grid from "@material-ui/core/Grid";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Paper from "@material-ui/core/Paper";
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -32,11 +33,11 @@ class Profile extends Component {
     this.setState({ succes_msg: false });
   }
   render() {
-    const { data } = this.props.location;
-    this.state.username = data;
+    //const { data } = this.props.location;
+    //this.state.username = data;
     return (
-      <div>
-        <App />
+      <div className="main">
+        <App className="ap_style" />
         <div className="left">
           <div>
             <img alt="DP" src={dp} className="big_avatar"></img>
@@ -94,6 +95,18 @@ class Profile extends Component {
                 </DialogActions>
               </Dialog>
             </div>
+            <div>
+              <Grid container justify="center" spacing={5}>
+                {[0, 1, 2, 3].map(value => (
+                  <Grid key={value} item>
+                    <Paper className="paper_size">
+                      <img></img>
+                      {value}
+                    </Paper>
+                  </Grid>
+                ))}
+              </Grid>
+            </div>
           </div>
           <div className="box">
             <div className="edit_button">
@@ -102,12 +115,8 @@ class Profile extends Component {
               </IconButton>
             </div>
             <div className="first_name">
-              <a>Name</a>
-              <TextField
-                placeholder="Name"
-                margin="normal"
-                className="name_textfield"
-              />
+              <a>{"Name   "}</a>
+              <a>{this.state.username}</a>
             </div>
           </div>
         </div>
