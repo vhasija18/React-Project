@@ -114,9 +114,16 @@ class Profile extends Component {
                 <Edit />
               </IconButton>
             </div>
-            <div className="first_name">
-              <a>{"Name   "}</a>
-              <a>{this.state.username}</a>
+            <a className="heading_1">{"Basic Details"}</a>
+            <hr />
+            <div className="horizontal_layout">
+              <a className="heading_1">Name:</a>
+              <a className="user_field">{this.state.username}</a>
+            </div>
+            <hr />
+            <div className="horizontal_gray">
+              <a className="heading_1">Date of Birth:</a>
+              <a className="user_field">{this.state.username}</a>
             </div>
           </div>
         </div>
