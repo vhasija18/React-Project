@@ -33,7 +33,7 @@ class Home extends Component {
   }
   post = () => {
     console.log("eeee");
-    this.props.history.push("/profile");
+    this.props.history.push({ pathname: "/profile", data: this.state.Name });
   };
   render() {
     const { data } = this.props.location;
@@ -55,10 +55,10 @@ class Home extends Component {
               variant="outlined"
               className="status_box"
             ></TextField>
-            <Button variant="contained" style={button} onClick={this.post}>
-              <a style={text_color}>Post</a>
-            </Button>
           </div>
+          <Button variant="contained" style={button} onClick={this.post}>
+            <a style={text_color}>Post</a>
+          </Button>
           <Table>
             <TableBody>
               {rows.map(row => (
@@ -82,7 +82,7 @@ class Home extends Component {
 export default Home;
 
 const button = {
-  marginLeft: "700px",
+  marginLeft: "500px",
   backgroundColor: "#00BCD4"
 };
 

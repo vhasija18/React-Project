@@ -1,17 +1,116 @@
 import React, { Component } from "react";
 import App from "./test_homeAppbar.jsx";
+import "./home.css";
+import dp from "./download.jpg";
+import IconButton from "@material-ui/core/IconButton";
+import Edit from "@material-ui/icons/Edit";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 class Profile extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "Vishwas",
+      openDialogbox: false,
+      succes_msg: true
+    };
+  }
+  handlePost() {
+    this.setState({ openDialogbox: true });
+  }
+  handleClose() {
+    this.setState({ openDialogbox: false });
+  }
+
+  handleUpload() {
+    this.setState({ succes_msg: false });
+  }
   render() {
+    const { data } = this.props.location;
+    this.state.username = data;
     return (
       <div>
         <App />
         <div className="left">
-          <div></div>
-          <a className="Name_style"></a>
+          <div>
+            <img alt="DP" src={dp} className="big_avatar"></img>
+          </div>
+          <a className="Name_style">{this.state.username}</a>
         </div>
-        <div className="center" />
+        <div className="center">
+          <div className="box">
+            <div className="edit_button">
+              <Button
+                color="primary"
+                onClick={() => {
+                  this.handlePost();
+                }}
+              >
+                Add photos
+              </Button>
+              <Dialog
+                open={this.state.openDialogbox}
+                keepMounted
+                onClose={() => {
+                  this.handleClose();
+                }}
+                aria-labelledby="alert-dialog-slide-title"
+                aria-describedby="alert-dialog-slide-description"
+              >
+                <DialogTitle id="alert-dialog-slide-title">
+                  {"Upload your photo"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-slide-description">
+                    <input type="file"></input>
+                    <a hidden={this.state.succes_msg} style={txt_color}>
+                      Image Uploaded!
+                    </a>
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    onClick={() => {
+                      this.handleUpload();
+                    }}
+                    color="primary"
+                  >
+                    Upload
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      this.handleClose();
+                    }}
+                    color="primary"
+                  >
+                    Close
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </div>
+          </div>
+          <div className="box">
+            <div className="edit_button">
+              <IconButton>
+                <Edit />
+              </IconButton>
+            </div>
+            <div className="first_name">
+              <a>Name</a>
+              <TextField
+                placeholder="Name"
+                margin="normal"
+                className="name_textfield"
+              />
+            </div>
+          </div>
+        </div>
         <div className="right" />
       </div>
     );
@@ -19,3 +118,7 @@ class Profile extends Component {
 }
 
 export default Profile;
+
+const txt_color = {
+  color: "#52F015"
+};

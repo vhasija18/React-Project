@@ -4,7 +4,6 @@ import AppBar from "@material-ui/core/AppBar";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "@material-ui/core/TextField";
 import Notify, { AlertTypes } from "../services/notify";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 class Login extends Component {
@@ -25,14 +24,14 @@ class Login extends Component {
       message = "Check your ID";
     }
     if (this.state.user_id.length < 8) {
-      if (flag == 1) {
+      if (flag === 1) {
         message = message + " and Check your passowrd";
       } else {
         flag = 1;
         message = "Check your Passowrd";
       }
     }
-    if (flag == 1) {
+    if (flag === 1) {
       Notify.sendNotification(message, AlertTypes.error);
     } else {
       console.log(this.state.user_id);

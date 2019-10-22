@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import RaisedButton from "material-ui/RaisedButton";
@@ -11,8 +11,8 @@ import NativeSelect from "@material-ui/core/NativeSelect";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Notify, { AlertTypes } from "../services/notify";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./test_home.css";
 
 const BootstrapInput = withStyles(theme => ({
   root: {
@@ -171,28 +171,28 @@ class Regiter extends Component {
     var message = "";
     var reg = /^[\w]+\@([\w]+\.)+[\w]+$/i;
     var reg_password = /^(?=.*[\w])(?=.*[#$^+=!*()@%&]).{8,10}$/;
-    if (this.state.firstName.length == 0) {
+    if (this.state.firstName.length === 0) {
       flag = 1;
       message = "Enter your first Name";
     }
-    if (this.state.lastName.length == 0) {
-      if (flag == 1) {
+    if (this.state.lastName.length === 0) {
+      if (flag === 1) {
         message = message + " and Enter your Last Name";
       } else {
         flag = 1;
         message = "Enter your last Name";
       }
     }
-    if (this.state.email.length == 0) {
-      if (flag == 1) {
+    if (this.state.email.length === 0) {
+      if (flag === 1) {
         message = message + "and Enter your email";
       } else {
         flag = 1;
         message = "Enter your email";
       }
     }
-    if (this.state.password.length == 0) {
-      if (flag == 1) {
+    if (this.state.password.length === 0) {
+      if (flag === 1) {
         message = message + "and Enter your password";
       } else {
         flag = 1;
@@ -207,10 +207,10 @@ class Regiter extends Component {
       flag = -1;
       Notify.sendNotification("Invalid Passowrd", AlertTypes.error);
     }
-    if (flag == 1) {
+    if (flag === 1) {
       Notify.sendNotification(message, AlertTypes.error);
     }
-    if (flag != 1 || flag != -1) {
+    if ((flag !== 1) & (flag !== -1)) {
       Notify.sendNotification("Registered! Go to Login", AlertTypes.success);
       console.log(this.state.firstName);
       console.log(this.state.lastName);
@@ -283,6 +283,7 @@ class Regiter extends Component {
                   style={radioitem}
                 />
                 <FormControlLabel
+                  id="male_radiobutton"
                   value="male"
                   control={<Radio />}
                   label="Male"
@@ -341,14 +342,16 @@ class Regiter extends Component {
   }
 }
 const appbar = {
-  background: "#00BCD4",
+  background: "#3F51B5",
   padding: "10px",
   textAlign: "right",
-  height: "50px"
+  height: "50px",
+  display: "flex"
 };
 const appbutton = {
   width: "50px",
-  marginLeft: "1150px"
+  marginLeft: "auto",
+  marginRight: "10px"
 };
 const radiogroup = {
   marginLeft: "auto",
