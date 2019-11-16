@@ -80,7 +80,7 @@ hr {
   border-top: 3px solid #ccc;
   margin: 1em 0;
   margin-left: 10px;
-  width: 40%;
+  width: 50%;
   padding: 0;
 }
 
@@ -94,10 +94,9 @@ hr {
   font-size: 20px;
 }
 
-.horizontal_gray {
-  display: flex;
-  flex-direction: row;
+.heading_2 {
+  margin-left: 20px;
   margin-right: auto;
-  background-color: beige;
-  width: 40%;
+  color: #9fa19f;
+  font-size: 20px;
 }
